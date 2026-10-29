@@ -9,7 +9,7 @@ Omo GLaDOS's own code (`mod/`, `sidecar/`, `docs/media/*.py`) and its procedural
 | [NumPy](https://numpy.org) | NumPy developers | BSD-3-Clause | Procedural geometry, maths, software renderer (pip dependency). |
 | [Pillow](https://python-pillow.org) | Jeffrey A. Clark and contributors | MIT-CMU (HPND) | Atlas PNGs and preview renders (pip dependency). |
 | [Fabric Loader / Fabric API](https://fabricmc.net) | FabricMC | Apache-2.0 | Compile and runtime dependency; not bundled. |
-| [Simple Voice Chat API](https://modrinth.com/plugin/simple-voice-chat) | Max Henkel | see its project page | Optional, compile-only; fetched and hash-checked by `mod/deps/fetch.py`; not bundled. |
+| [Simple Voice Chat API](https://modrinth.com/plugin/simple-voice-chat) | Max Henkel | All rights reserved (published API for add-ons) | Optional, compile-only: `mod/deps/fetch.py` downloads it from the author's Maven onto your machine and checks its hash. Never bundled or redistributed; players install Simple Voice Chat themselves from its official page. |
 | [Crimson Text](https://github.com/googlefonts/Crimson), [IBM Plex Mono](https://github.com/IBM/plex) | Sebastian Kosch; IBM | SIL OFL 1.1 | Typefaces in the README images (`docs/media/make_*.py`); the fonts themselves are not included. |
 
 ## GLaDOS and Valve
