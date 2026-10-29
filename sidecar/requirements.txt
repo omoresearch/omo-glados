@@ -1,0 +1,4 @@
+# Sidecar runtime (tested: Python 3.12 and 3.14, mujoco 3.17, numpy 2.5, pillow 13)
+mujoco>=3.3
+numpy>=2.0
+pillow>=10.0     # atlas PNGs, preview renders

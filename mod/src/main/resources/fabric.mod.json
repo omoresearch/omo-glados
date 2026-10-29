@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "glados",
+  "version": "1.0.0",
+  "name": "Omo GLaDOS",
+  "description": "A GLaDOS-style ceiling AI hanging in your Minecraft lab: original procedural model, real MuJoCo physics in a local sidecar (127.0.0.1:8794), rendered articulated in-game, driven by !glados chat commands. Fan project by Omo Research; not affiliated with Valve.",
+  "authors": [
+    "Omo Research"
+  ],
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "dev.yifan.glados.Glados"
+    ],
+    "voicechat": [
+      "dev.yifan.glados.GladosVoicePlugin"
+    ]
+  },
+  "suggests": {
+    "voicechat": ">=2.6.0"
+  },
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "fabric-api": "*",
+    "minecraft": "~26.2"
+  },
+  "contact": {
+    "homepage": "https://www.omo.sh",
+    "sources": "https://github.com/omoresearch/omo-glados",
+    "issues": "https://github.com/omoresearch/omo-glados/issues"
+  }
+}

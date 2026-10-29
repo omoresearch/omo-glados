@@ -1,0 +1,24 @@
+# build outputs
+mod/build/
+mod/deps/*.jar
+# sidecar runtime and render output
+sidecar/.venv/
+sidecar/preview/
+__pycache__/
+*.pyc
+*.part
+*.log
+# models: only our own procedural one is ever committed. Anything you import yourself stays local
+# (most GLaDOS models online are Valve fan art or rips, not redistributable).
+sidecar/assets/*
+!sidecar/assets/procedural/
+*.blend
+*.blend1
+*.glb
+*.gltf
+*.fbx
+*.obj
+# voice audio
+*.wav
+*.mp3
+*.pcm
