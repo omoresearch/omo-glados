@@ -6,6 +6,7 @@ can drive her: another renderer, a voice backend, a chat bridge.
 ## Ground rules
 
 - Loopback only: `127.0.0.1:8794` (`GLADOS_PORT` overrides). Never `0.0.0.0`. JSON, no auth.
+- Requests that carry an `Origin` header (any web page, including the in-game web walls) or a `Host` other than `127.0.0.1` / `localhost` / `[::1]` (DNS rebinding) get `403`, so only local programs can drive the sim.
 - Sim frame: MuJoCo world, z-up, metres. Origin = the ceiling mount point (underside of the ceiling); she hangs
   in -z. Quaternions `[w,x,y,z]`. At rest the eye looks along sim +x.
 - Bodies, root first: `mount` (fixed) -> `arm1` -> `arm2` -> `torso` -> `neck` -> `head`.

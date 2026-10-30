@@ -19,6 +19,23 @@ import glados_model as gm  # noqa: E402
 import glados_sim as gs  # noqa: E402
 
 HOST = "127.0.0.1"
+
+
+LOOPBACK_NAMES = ("127.0.0.1", "localhost", "::1")
+
+
+def foreign_request(headers):
+    """Why a request must be refused, or None. Only local programs (the mod, the tools) may drive the
+    sim: a web page in any browser on this machine, including the in-game web walls, can also reach
+    127.0.0.1. Browsers always send Origin on cross-site POSTs, and a DNS-rebinding page carries its
+    own host name in Host; the mod and the Python tools send neither."""
+    if headers.get("Origin"):
+        return "requests from web pages are refused"
+    host = (headers.get("Host") or "").strip()
+    name = host[1:host.index("]")] if host.startswith("[") and "]" in host else host.rsplit(":", 1)[0]
+    if name.lower() not in LOOPBACK_NAMES:
+        return "only 127.0.0.1 / localhost may be used as the Host"
+    return None
 PORT = int(os.environ.get("GLADOS_PORT", "8794"))
 TWITCH_ALLOWED = {"idle", "track", "angry", "scan", "nod", "shake", "bow", "sleep", "wake", "look", "dance", "spooky"}
 TWITCH_MODE_COOLDOWN = {"spooky": 60.0}   # per-mode cooldown for twitch (s), on top of the mod's global 2 s
@@ -234,6 +251,9 @@ class Handler(BaseHTTPRequestHandler):
         return obj
 
     def do_GET(self):
+        why = foreign_request(self.headers)
+        if why:
+            return self._send(403, {"ok": False, "error": why})
         path = self.path.split("?", 1)[0]
         if path == "/health":
             return self._send(200, SERVICE.get_health())
@@ -252,6 +272,9 @@ class Handler(BaseHTTPRequestHandler):
         return self._send(404, {"ok": False, "error": "not found"})
 
     def do_POST(self):
+        why = foreign_request(self.headers)
+        if why:
+            return self._send(403, {"ok": False, "error": why})
         path = self.path.split("?", 1)[0]
         try:
             body = self._json_body()
